@@ -38,3 +38,11 @@ The project is structured using the Clean Architecture pattern, which promotes s
 ## API Key
 
 Newsd uses the open-source API provided by [newsapi.org](https://newsapi.org/docs/endpoints/everything) for fetching the news articles. To run the app, you will need to obtain an API key by creating an account on their website.
+
+## Contact
+
+For any questions or inquiries, please contact the project maintainer:
+
+Reyn Flores
+
+Email: ramflores462@gmail.com
