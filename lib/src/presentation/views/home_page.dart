@@ -98,34 +98,28 @@ class _HomePageState extends State<HomePage> {
                 itemCount: tabItems.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
+                  return TextButton(
+                    onPressed: () {
                       setState(() {
                         current = index;
                         newsCubit.getNews(category: tabItems[index]);
                       });
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: current == index
-                            ? AppColors.blue
-                            : AppColors.greyE6,
-                        borderRadius: BorderRadius.circular(25),
+                    style: TextButton.styleFrom(
+                      backgroundColor:
+                          current == index ? AppColors.blue : AppColors.greyE6,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Center(
-                          child: Text(
-                            tabItems[index],
-                            style: TextStyle(
-                              color: current == index
-                                  ? Colors.white
-                                  : AppColors.grey78,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                    ),
+                    child: Text(
+                      tabItems[index],
+                      style: TextStyle(
+                        color:
+                            current == index ? Colors.white : AppColors.grey78,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   );
