@@ -54,26 +54,25 @@ class NewsDetailPage extends StatelessWidget {
                 children: [
                   Text(
                     article.source?.name ?? '',
-                    style: const TextStyle(
-                        color: AppColors.grey78,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w300,
-                        fontSize: 14),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: AppColors.grey78),
                   ),
-                  const Text(
+                  Text(
                     ' • ',
-                    style: TextStyle(
-                        color: AppColors.blue,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w300,
-                        fontSize: 14),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: AppColors.blue),
                   ),
-                  Text(article.publishedAt ?? '',
-                      style: const TextStyle(
-                          color: AppColors.grey78,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w300,
-                          fontSize: 14)),
+                  Text(
+                    article.publishedAt ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: AppColors.grey78),
+                  ),
                 ],
               ),
               const SizedBox(
@@ -81,11 +80,7 @@ class NewsDetailPage extends StatelessWidget {
               ),
               Text(
                 article.title ?? '',
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(
                 height: 16,
@@ -105,11 +100,10 @@ class NewsDetailPage extends StatelessWidget {
               ),
               Text(
                 article.content ?? '',
-                style: const TextStyle(
-                    color: AppColors.grey78,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: AppColors.grey78),
               ),
             ],
           ),

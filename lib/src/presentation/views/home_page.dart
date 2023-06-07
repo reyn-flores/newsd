@@ -30,32 +30,28 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Newsd',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w900,
-          ),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Colors.white,
+              ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 top: 16,
                 bottom: 10,
                 left: 16,
                 right: 16,
               ),
-              child: Text('Breaking News',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16)),
+              child: Text(
+                'Breaking News',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
             ),
             SizedBox(
               height: 180,
@@ -125,7 +121,6 @@ class _HomePageState extends State<HomePage> {
                               color: current == index
                                   ? Colors.white
                                   : AppColors.grey78,
-                              fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
                               fontSize: 12,
                             ),
@@ -140,15 +135,11 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(16),
+            Padding(
+              padding: const EdgeInsets.all(16),
               child: Text(
                 'Recommended for you',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             BlocBuilder<NewsCubit, NewsState>(

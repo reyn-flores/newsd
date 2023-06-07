@@ -33,34 +33,25 @@ class RecommendedNewsCard extends StatelessWidget {
                 children: [
                   Text(
                     article.source?.name ?? '',
-                    style: const TextStyle(
-                      color: AppColors.grey78,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w300,
-                      fontSize: 10,
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall
+                        ?.copyWith(color: AppColors.grey78),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
                       article.title ?? '',
                       maxLines: 2,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Text(
                     article.publishedAt ?? '',
-                    style: const TextStyle(
-                      color: AppColors.grey78,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w300,
-                      fontSize: 10,
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall
+                        ?.copyWith(color: AppColors.grey78),
                   ),
                 ],
               ),
