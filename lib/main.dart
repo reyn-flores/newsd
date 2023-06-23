@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsd/src/config/router/app_router.dart';
 import 'package:newsd/src/config/themes/app_themes.dart';
 import 'package:newsd/src/domain/repositories/api_repository.dart';
+import 'package:newsd/src/domain/repositories/database_repository.dart';
 import 'package:newsd/src/locator.dart';
 import 'package:newsd/src/presentation/cubits/breaking_news/breaking_news_cubit.dart';
+import 'package:newsd/src/presentation/cubits/local_articles/local_articles_cubit.dart';
 import 'package:newsd/src/presentation/cubits/news/news_cubit.dart';
 import 'package:newsd/src/utils/constants/strings.dart';
 
@@ -30,7 +32,12 @@ class MyApp extends StatelessWidget {
           create: (context) => BreakingNewsCubit(
             locator<ApiRepository>(),
           )..getBreakingNews(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => LocalArticlesCubit(
+            locator<DatabaseRepository>(),
+          )..getAllSavedArticles(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

@@ -2,10 +2,16 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:floor/floor.dart';
 
 import 'package:newsd/src/domain/models/source.dart';
+import 'package:newsd/src/utils/constants/strings.dart';
 
+@Entity(tableName: articlesTableName)
 class Article extends Equatable {
+  @PrimaryKey(autoGenerate: true)
+  final int? id;
+
   final Source? source;
   final String? author;
   final String? title;
@@ -16,6 +22,7 @@ class Article extends Equatable {
   final String? content;
 
   const Article({
+    this.id,
     this.source,
     this.author,
     this.title,
@@ -27,6 +34,7 @@ class Article extends Equatable {
   });
 
   Article copyWith({
+    int? id,
     Source? source,
     String? author,
     String? title,
@@ -37,6 +45,7 @@ class Article extends Equatable {
     String? content,
   }) {
     return Article(
+      id: id ?? this.id,
       source: source ?? this.source,
       author: author ?? this.author,
       title: title ?? this.title,
@@ -50,6 +59,7 @@ class Article extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'source': source?.toMap(),
       'author': author,
       'title': title,
@@ -63,6 +73,7 @@ class Article extends Equatable {
 
   factory Article.fromMap(Map<String, dynamic> map) {
     return Article(
+      id: map['id'] != null ? map['id'] as int : null,
       source: map['source'] != null
           ? Source.fromMap(map['source'] as Map<String, dynamic>)
           : null,
@@ -90,6 +101,7 @@ class Article extends Equatable {
   @override
   List<Object?> get props {
     return [
+      id,
       source,
       author,
       title,

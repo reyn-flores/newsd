@@ -1,5 +1,5 @@
 import 'package:newsd/src/data/base/base_api_repository.dart';
-import 'package:newsd/src/data/datasource/news_api_service.dart';
+import 'package:newsd/src/data/datasource/remote/news_api_service.dart';
 import 'package:newsd/src/domain/models/requests/breaking_news_request.dart';
 import 'package:newsd/src/domain/models/requests/news_request.dart';
 import 'package:newsd/src/domain/models/responses/breaking_news_response.dart';

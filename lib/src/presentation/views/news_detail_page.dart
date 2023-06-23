@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newsd/src/config/colors.dart';
 import 'package:newsd/src/config/router/app_router.dart';
 import 'package:newsd/src/domain/models/article.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsd/src/presentation/cubits/local_articles/local_articles_cubit.dart';
 
 class NewsDetailPage extends StatelessWidget {
   final Article article;
@@ -9,6 +11,14 @@ class NewsDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localArticlesCubit =
+        BlocProvider.of<LocalArticlesCubit>(context, listen: true);
+    var isFavorite = false;
+    if (localArticlesCubit.favorites
+        .any((item) => item.title == article.title)) {
+      isFavorite = true;
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -21,11 +31,11 @@ class NewsDetailPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // todo
+              localArticlesCubit.saveArticle(article: article);
             },
-            icon: const Icon(
-              Icons.bookmark_border_rounded,
-              color: Colors.black,
+            icon: Icon(
+              isFavorite ? Icons.bookmark : Icons.bookmark_border_rounded,
+              color: isFavorite ? AppColors.blue : Colors.black,
             ),
           )
         ],
