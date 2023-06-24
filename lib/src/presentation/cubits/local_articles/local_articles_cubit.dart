@@ -16,8 +16,8 @@ class LocalArticlesCubit extends Cubit<LocalArticlesState> {
     emit(await _getAllSavedArticles());
   }
 
-  Future<void> removeArticle({required Article article}) async {
-    await _databaseRepository.removeArticle(article);
+  Future<void> removeArticle({required String title}) async {
+    await _databaseRepository.removeArticle(title);
     emit(await _getAllSavedArticles());
   }
 

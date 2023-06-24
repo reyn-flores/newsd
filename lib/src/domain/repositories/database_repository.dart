@@ -5,5 +5,5 @@ abstract class DatabaseRepository {
 
   Future<void> saveArticle(Article article);
 
-  Future<void> removeArticle(Article article);
+  Future<void> removeArticle(String title);
 }

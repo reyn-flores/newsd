@@ -117,21 +117,6 @@ class _$ArticleDao extends ArticleDao {
                   'urlToImage': item.urlToImage,
                   'publishedAt': item.publishedAt,
                   'content': item.content
-                }),
-        _articleDeletionAdapter = DeletionAdapter(
-            database,
-            'articles_table',
-            ['id'],
-            (Article item) => <String, Object?>{
-                  'id': item.id,
-                  'source': _sourceTypeConverter.encode(item.source),
-                  'author': item.author,
-                  'title': item.title,
-                  'description': item.description,
-                  'url': item.url,
-                  'urlToImage': item.urlToImage,
-                  'publishedAt': item.publishedAt,
-                  'content': item.content
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -141,8 +126,6 @@ class _$ArticleDao extends ArticleDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<Article> _articleInsertionAdapter;
-
-  final DeletionAdapter<Article> _articleDeletionAdapter;
 
   @override
   Future<List<Article>> getAllArticles() async {
@@ -160,13 +143,15 @@ class _$ArticleDao extends ArticleDao {
   }
 
   @override
-  Future<void> insertArticle(Article article) async {
-    await _articleInsertionAdapter.insert(article, OnConflictStrategy.replace);
+  Future<void> deleteArticle(String title) async {
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM articles_table WHERE title=?1',
+        arguments: [title]);
   }
 
   @override
-  Future<void> deleteArticle(Article article) async {
-    await _articleDeletionAdapter.delete(article);
+  Future<void> insertArticle(Article article) async {
+    await _articleInsertionAdapter.insert(article, OnConflictStrategy.replace);
   }
 }
 

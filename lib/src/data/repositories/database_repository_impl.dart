@@ -14,8 +14,8 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<void> removeArticle(Article article) async {
-    return _appDatabase.articleDao.deleteArticle(article);
+  Future<void> removeArticle(String title) async {
+    return _appDatabase.articleDao.deleteArticle(title);
   }
 
   @override

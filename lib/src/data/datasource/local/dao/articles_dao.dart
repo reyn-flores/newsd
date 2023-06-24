@@ -10,6 +10,6 @@ abstract class ArticleDao {
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertArticle(Article article);
 
-  @delete
-  Future<void> deleteArticle(Article article);
+  @Query('DELETE FROM $articlesTableName WHERE title=:title')
+  Future<void> deleteArticle(String title);
 }

@@ -31,7 +31,11 @@ class NewsDetailPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              localArticlesCubit.saveArticle(article: article);
+              if (isFavorite && article.title != null) {
+                localArticlesCubit.removeArticle(title: article.title!);
+              } else {
+                localArticlesCubit.saveArticle(article: article);
+              }
             },
             icon: Icon(
               isFavorite ? Icons.bookmark : Icons.bookmark_border_rounded,

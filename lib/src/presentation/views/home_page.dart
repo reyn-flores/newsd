@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsd/src/config/colors.dart';
+import 'package:newsd/src/domain/models/article.dart';
 import 'package:newsd/src/presentation/cubits/breaking_news/breaking_news_cubit.dart';
+import 'package:newsd/src/presentation/cubits/local_articles/local_articles_cubit.dart';
 import 'package:newsd/src/presentation/cubits/news/news_cubit.dart';
 import 'package:newsd/src/presentation/widgets/breaking_news_card.dart';
 import 'package:newsd/src/presentation/widgets/recommended_news_card.dart';
@@ -186,27 +188,7 @@ class _NewsPageState extends State<NewsPage> {
                     child: CupertinoActivityIndicator(),
                   );
                 case NewsSuccess:
-                  return ListView.separated(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      bottom: 16,
-                    ),
-                    shrinkWrap: true,
-                    primary: false,
-                    scrollDirection: Axis.vertical,
-                    itemCount: state.articles.length,
-                    itemBuilder: (context, index) {
-                      return RecommendedNewsCard(
-                        article: state.articles[index],
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        height: 8,
-                      );
-                    },
-                  );
+                  return ArticlesList(articles: state.articles);
                 case NewsFailed:
                   return const Center(
                     child: Text('API FETCH FAILED!'),
@@ -232,8 +214,63 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('FAVORITES'),
+    return BlocBuilder<LocalArticlesCubit, LocalArticlesState>(
+      builder: (_, state) {
+        switch (state.runtimeType) {
+          case LocalArticlesLoading:
+            return const Center(child: CupertinoActivityIndicator());
+          case LocalArticlesSuccess:
+            {
+              if (state.articles.isEmpty) {
+                return const Center(
+                  child: Text('NO SAVED ARTICLES'),
+                );
+              } else {
+                return Column(
+                  children: [
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    ArticlesList(articles: state.articles)
+                  ],
+                );
+              }
+            }
+          default:
+            return const SizedBox();
+        }
+      },
+    );
+  }
+}
+
+class ArticlesList extends StatelessWidget {
+  final List<Article> articles;
+
+  const ArticlesList({super.key, required this.articles});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+        bottom: 16,
+      ),
+      shrinkWrap: true,
+      primary: false,
+      scrollDirection: Axis.vertical,
+      itemCount: articles.length,
+      itemBuilder: (context, index) {
+        return RecommendedNewsCard(
+          article: articles[index],
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return const SizedBox(
+          height: 8,
+        );
+      },
     );
   }
 }
