@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => NewsCubit(
             locator<ApiRepository>(),
-          )..getNews(),
+          ),
         ),
         BlocProvider(
           create: (context) => BreakingNewsCubit(

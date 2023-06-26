@@ -27,6 +27,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     final newsCubit = BlocProvider.of<NewsCubit>(context);
+    newsCubit.getNews(category: tabItems[current]);
 
     return SingleChildScrollView(
       child: Column(
