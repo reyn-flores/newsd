@@ -1,0 +1,6 @@
+{
+    "appName": "Newsd",
+    "@appName": {
+        "description": "Application name"
+    }
+}
